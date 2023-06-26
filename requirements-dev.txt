@@ -1,0 +1,17 @@
+# Optional dependencies defined by the dev extra tag
+jupytext >= 1.14.6
+pylint >= 2.17.4
+pyright >= 1.1.315
+pytest >= 7.3.2
+autodocsumm >= 0.2.10
+myst-parser >= 0.18.1
+nbsphinx >= 0.8.12
+numpydoc >= 1.5.0
+sphinx >= 5.3
+sphinx-autoapi >= 2.0.1
+sphinx_autodoc_typehints >= 1.21.8
+sphinxcontrib-napoleon >= 0.7
+sphinx-rtd-theme >= 1.1.1
+tomli >= 2.0.1
+# urllib3 v2 requires OpenSSL v1.1.1+, but Vercel uses v1.0.2
+urllib3 < 2.0
