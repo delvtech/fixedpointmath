@@ -29,7 +29,7 @@ class FixedPoint:
     """
 
     _scaled_value: int  # integer representation of self
-    _special_value: SpecialValues  # string representation of self
+    _special_value: SpecialValues | None  # string representation of self
 
     def __init__(
         self,
@@ -59,20 +59,19 @@ class FixedPoint:
         if isinstance(unscaled_value, bool):
             unscaled_value = int(unscaled_value)
         # associate each type option to a setter function
-        unscaled_type_setters = {
-            float: self._set_float,
-            int: self._set_int,
-            str: self._set_str,
-            FixedPoint: self._set_fixedpoint,
-        }
         if unscaled_value is None:  # assume scaled_value is not None from above
             if not isinstance(scaled_value, int):
                 raise TypeError(f"{scaled_value=} must have type `int`")
             super().__setattr__("_scaled_value", scaled_value)
         else:  # assume scaled_value is None from above
-            if type(unscaled_value) in unscaled_type_setters:
-                setter_func = unscaled_type_setters[type(unscaled_value)]
-                setter_func(unscaled_value)
+            if isinstance(unscaled_value, float):
+                self._set_float(unscaled_value)
+            elif isinstance(unscaled_value, int):
+                self._set_int(unscaled_value)
+            elif isinstance(unscaled_value, str):
+                self._set_str(unscaled_value)
+            elif isinstance(unscaled_value, FixedPoint):
+                self._set_fixedpoint(unscaled_value)
             else:
                 raise TypeError(f"{type(unscaled_value)=} is not supported")
 
@@ -144,7 +143,7 @@ class FixedPoint:
         raise ValueError("scaled_value is immutable")
 
     @property
-    def special_value(self) -> str:
+    def special_value(self) -> str | None:
         """Special value from FixedPoint format
 
         This work-around is required to make the internal representation immutable,
@@ -354,7 +353,7 @@ class FixedPoint:
                 decimal_places=self.decimal_places,
                 signed=self.signed,
             )
-        if self.is_nan() or self.is_inf:
+        if self.is_nan() or self.is_inf():
             return self
         # must be -inf
         raise ValueError(f"cannot take square root of {self}")
@@ -618,7 +617,7 @@ class FixedPoint:
         return hash((self.scaled_value, self.__class__.__name__))
 
     # Since fixedpoint objects are immutable, simply return a shallow copy here for performance
-    def __deepcopy__(self, memo) -> FixedPoint:
+    def __deepcopy__(self, memo: Any) -> FixedPoint:
         memo[id(self)] = self
         return self
 
@@ -653,9 +652,7 @@ class FixedPoint:
 
     def is_inf(self) -> bool:
         r"""Return True if self is inf or -inf."""
-        if self.special_value is not None and "inf" in self.special_value:
-            return True
-        return False
+        return bool(self.special_value is not None and "inf" in self.special_value)
 
     def is_neg_inf(self) -> bool:
         r"""Return True if self is inf or -inf."""

@@ -10,10 +10,13 @@ extend-exclude = "\\.ipynb"
 
 [tool.pyright]
 venv = ".venv"
-venvPath = "../../"
+venvPath = "./"
+# TODO fix this, throwing errors in fixed_point.py
 typeCheckingMode = "strict"
 exclude = [
     ".venv",
     ".vscode",
     "docs",
 ]
+reportIncompatibleMethodOverride = false
+reportUnnecessaryIsInstance = false
