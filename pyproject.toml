@@ -54,7 +54,4 @@ target-version = "py310"
 exclude = [
     ".venv",
     ".vscode",
-    "docs",
-    "hyperdrive_solidity/.venv",
-    "hyperdrive_solidity",
 ]
