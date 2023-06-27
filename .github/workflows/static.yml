@@ -26,5 +26,5 @@ jobs:
           python -m pip install -r requirements.txt
           python -m pip install -r requirements-dev.txt
 
-      - name: Analysing code with pyright
+      - name: Analyzing code with pyright
         run: python -m pyright $(git ls-files '*.py')
