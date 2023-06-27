@@ -12,12 +12,14 @@ extend-exclude = "\\.ipynb"
 venv = ".venv"
 venvPath = "./"
 # TODO fix this, throwing errors in fixed_point.py
-# typeCheckingMode = "strict"
+typeCheckingMode = "strict"
 exclude = [
     ".venv",
     ".vscode",
     "docs",
 ]
+reportIncompatibleMethodOverride = false
+reportUnnecessaryIsInstance = false
 
 [tool.ruff]
 # Default is: pycodestyle (E) and Pyflakes (F)
