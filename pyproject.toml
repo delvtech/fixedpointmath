@@ -1,0 +1,19 @@
+[tool.pytest.ini_options]
+addopts = ["--import-mode=importlib"]
+
+[tool.pylint.format]
+max-line-length = "120"
+
+[tool.black]
+line-length = "120"
+extend-exclude = "\\.ipynb"
+
+[tool.pyright]
+venv = ".venv"
+venvPath = "../../"
+typeCheckingMode = "strict"
+exclude = [
+    ".venv",
+    ".vscode",
+    "docs",
+]
