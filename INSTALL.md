@@ -25,7 +25,7 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-### 4. Install Agent0
+### 4. Install agent_0
 
 All individual subpackages can be installed from the outermost repo through `requirements.txt`
 
@@ -45,7 +45,7 @@ An explanation of what the above steps do:
 Alternatively, each subpackage in `lib` can be individaully installed through pip. For example, you can install `fixedpointmath` through pip as follows:
 ```bash
 python -m pip install lib/fixedpointmath # Install from local file
-python -m pip install 'fixedpointmath @ git+https://github.com/delvtech/agent0.git/#subdirectory=lib/fixedpointmath' # Install from github
+python -m pip install 'fixedpointmath @ git+https://github.com/delvtech/agent_0.git/#subdirectory=lib/fixedpointmath' # Install from github
 ```
 
 

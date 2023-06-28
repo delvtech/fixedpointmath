@@ -1,7 +1,7 @@
-[![](https://codecov.io/gh/delvtech/agent0/branch/main/graph/badge.svg?token=1S60MD42ZP)](https://app.codecov.io/gh/delvtech/agent0?displayType=list)
+[![](https://codecov.io/gh/delvtech/agent_0/branch/main/graph/badge.svg?token=1S60MD42ZP)](https://app.codecov.io/gh/delvtech/agent_0?displayType=list)
 [![](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![](https://img.shields.io/badge/testing-pytest-blue.svg)](https://docs.pytest.org/en/latest/contents.html)
-<br><a href="https://app.codecov.io/gh/delvtech/agent0?displayType=list"><img height="50px" src="https://codecov.io/gh/delvtech/agent0/branch/main/graphs/sunburst.svg?token=1S60MD42ZP"><a>
+<br><a href="https://app.codecov.io/gh/delvtech/agent_0?displayType=list"><img height="50px" src="https://codecov.io/gh/delvtech/agent_0/branch/main/graphs/sunburst.svg?token=1S60MD42ZP"><a>
 
 # [DELV](https://delv.tech) Agent 0
 
@@ -22,7 +22,7 @@ Documentation can be found [here](https://elfpy.delv.tech).
 
 ## Install
 
-Please refer to [INSTALL.md](https://github.com/delvtech/agent0/blob/main/INSTALL.md).
+Please refer to [INSTALL.md](https://github.com/delvtech/agent_0/blob/main/INSTALL.md).
 
 ## Deployment
 
@@ -34,4 +34,4 @@ Testing is achieved with [py.test](https://docs.pytest.org/en/latest/contents.ht
 
 ## Contributions
 
-Please refer to [CONTRIBUTING.md](https://github.com/delvtech/agent0/blob/main/CONTRIBUTING.md).
+Please refer to [CONTRIBUTING.md](https://github.com/delvtech/agent_0/blob/main/CONTRIBUTING.md).
