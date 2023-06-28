@@ -17,5 +17,5 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/delvtech/agent0"
-"Bug Tracker" = "https://github.com/delvtech/agent0/issues"
+"Homepage" = "https://github.com/delvtech/agent_0"
+"Bug Tracker" = "https://github.com/delvtech/agent_0/issues"
