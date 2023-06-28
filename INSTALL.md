@@ -45,7 +45,7 @@ An explanation of what the above steps do:
 Alternatively, each subpackage in `lib` can be individaully installed through pip. For example, you can install `fixedpointmath` through pip as follows:
 ```bash
 python -m pip install lib/fixedpointmath # Install from local file
-# TODO add installation through git here
+python -m pip install 'fixedpointmath @ git+https://github.com/delvtech/agent0.git/#subdirectory=lib/fixedpointmath' # Install from github
 ```
 
 
