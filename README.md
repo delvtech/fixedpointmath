@@ -24,6 +24,10 @@ Documentation can be found [here](https://elfpy.delv.tech).
 
 Please refer to [INSTALL.md](https://github.com/delvtech/agent_0/blob/main/INSTALL.md).
 
+## Build
+
+Please refer to [BUILD.md](https://github.com/delvtech/agent_0/blob/main/BUILD.md).
+
 ## Deployment
 
 TODO

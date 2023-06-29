@@ -28,6 +28,9 @@ htmlcov
 # Builds
 */*/build
 
+# Pypi builds
+lib/*/dist
+
 # PEP 582
 __pypackages__/
 
