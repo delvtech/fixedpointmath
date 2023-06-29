@@ -1,7 +1,7 @@
-[![](https://codecov.io/gh/delvtech/agent_0/branch/main/graph/badge.svg?token=1S60MD42ZP)](https://app.codecov.io/gh/delvtech/agent_0?displayType=list)
+[![](https://codecov.io/gh/delvtech/agent_0/branch/main/graph/badge.svg?token=n5y9GhZSYZ)](https://app.codecov.io/gh/delvtech/agent_0?displayType=list)
 [![](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![](https://img.shields.io/badge/testing-pytest-blue.svg)](https://docs.pytest.org/en/latest/contents.html)
-<br><a href="https://app.codecov.io/gh/delvtech/agent_0?displayType=list"><img height="50px" src="https://codecov.io/gh/delvtech/agent_0/branch/main/graphs/sunburst.svg?token=1S60MD42ZP"><a>
+<br><a href="https://app.codecov.io/gh/delvtech/agent_0?displayType=list"><img height="50px" src="https://codecov.io/gh/delvtech/agent_0/branch/main/graphs/sunburst.svg?token=n5y9GhZSYZ"><a>
 
 # [DELV](https://delv.tech) Agent 0
 
