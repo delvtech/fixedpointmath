@@ -567,9 +567,7 @@ class FixedPoint:
 
     def __float__(self) -> float:
         r"""Cast to float"""
-        if self.special_value is not None:
-            return float(self.special_value)
-        return float(self.scaled_value) / 10**self.decimal_places
+        return float(str(self))
 
     def __bool__(self) -> bool:
         r"""Cast to bool"""

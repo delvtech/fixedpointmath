@@ -3,6 +3,7 @@ __pycache__/
 
 # pytest
 .pytest_cache
+.build
 
 # Jupyter Notebook
 .ipynb_checkpoints
