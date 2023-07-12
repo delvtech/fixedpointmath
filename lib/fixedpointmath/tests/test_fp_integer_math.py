@@ -2,8 +2,7 @@
 import math
 import unittest
 
-from fixedpointmath import errors
-from fixedpointmath import FixedPointIntegerMath
+from fixedpointmath import FixedPointIntegerMath, errors
 
 # pylint: disable=too-many-public-methods
 
@@ -134,6 +133,8 @@ class TestFixedPointIntegerMath(unittest.TestCase):
         )
         self.assertEqual(FixedPointIntegerMath.div_up(2 * FixedPointIntegerMath.ONE_18, int(1e19 * 1e18)), 1)
         self.assertEqual(FixedPointIntegerMath.div_up(0, FixedPointIntegerMath.ONE_18), 0)
+        self.assertEqual(FixedPointIntegerMath.div_up(-1, 1), -FixedPointIntegerMath.ONE_18)
+        self.assertEqual(FixedPointIntegerMath.div_up(1, -1), -FixedPointIntegerMath.ONE_18)
 
     def test_fail_div_up_zero_denominator(self):
         """Test error when dividing by zero"""

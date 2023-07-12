@@ -623,7 +623,7 @@ class FixedPoint:
     def div_up(self, other: OtherTypes | FixedPoint) -> FixedPoint:
         r"""Divide self by other, rounding up"""
         other = self._coerce_other(other)
-        if other <= FixedPoint("0.0"):
+        if other == FixedPoint("0.0"):
             raise errors.DivisionByZero
         return FixedPoint(
             scaled_value=FixedPointIntegerMath.div_up(self.scaled_value, other.scaled_value),

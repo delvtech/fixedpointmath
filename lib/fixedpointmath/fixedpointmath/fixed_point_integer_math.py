@@ -7,6 +7,13 @@ from . import errors
 # pylint: disable=invalid-name
 
 
+def sign(value: int) -> int:
+    """Get the sign of an integer value."""
+    if value < 0:
+        return -1
+    return 1
+
+
 class FixedPointIntegerMath:
     """Safe integer arithmetic that assumes a 18-decimal fixed-point representation
 
@@ -93,7 +100,9 @@ class FixedPointIntegerMath:
     @staticmethod
     def div_up(a: int, b: int) -> int:
         r"""Divide a by b, rounding up."""
-        return FixedPointIntegerMath.mul_div_up(a, FixedPointIntegerMath.ONE_18, b)
+
+        # mul_div_up expects positive values to do the rounding correctly.  handle the sign here.
+        return sign(a) * sign(b) * FixedPointIntegerMath.mul_div_up(abs(a), FixedPointIntegerMath.ONE_18, abs(b))
 
     @staticmethod
     def ilog2(x: int) -> int:
