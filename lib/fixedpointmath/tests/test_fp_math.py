@@ -2,7 +2,7 @@
 import math
 import unittest
 
-from fixedpointmath import FixedPointMath, FixedPoint
+from fixedpointmath import FixedPoint, FixedPointMath
 
 # pylint: disable=unneeded-not
 
@@ -17,6 +17,35 @@ class TestFixedPointMath(unittest.TestCase):
     INF = FixedPoint("inf")
     NEG_INF = FixedPoint("-inf")
     NAN = FixedPoint("nan")
+
+    def test_clip(self):
+        """Test clip method with finite values"""
+        assert FixedPointMath.clip(0, 1, 2) == 1
+        assert FixedPointMath.clip(-1, -5, 5) == -1
+        assert FixedPointMath.clip(3, -3, -1) == -1
+        assert FixedPointMath.clip(-1.0, -3.0, 1) == -1.0
+        assert FixedPointMath.clip(1.0, 3.0, 3.0) == 3.0
+        assert FixedPointMath.clip(FixedPoint(1.0), FixedPoint(0.0), FixedPoint(3.0)) == FixedPoint(1.0)
+        assert FixedPointMath.clip(
+            FixedPoint(1.0), FixedPoint(scaled_value=1), FixedPoint(scaled_value=int(1e18 + 1))
+        ) == FixedPoint(1.0)
+
+    def test_clip_nonfinite(self):
+        """Test clip method with non-finite values"""
+        assert FixedPointMath.clip(self.NAN, self.NEG_ONE, self.ONE).is_nan() is True
+        assert FixedPointMath.clip(self.NAN, self.NEG_INF, self.INF).is_nan() is True
+        assert FixedPointMath.clip(self.ONE, self.NEG_INF, self.INF) == self.ONE
+        assert FixedPointMath.clip(self.ONE, self.NEG_INF, self.NEG_ONE) == self.NEG_ONE
+        assert FixedPointMath.clip(self.INF, self.NEG_INF, self.INF) == self.INF
+        assert FixedPointMath.clip(self.INF, self.NEG_INF, self.ONE) == self.ONE
+        assert FixedPointMath.clip(self.NEG_INF, self.NEG_ONE, self.INF) == self.NEG_ONE
+
+    def test_clip_error(self):
+        """Test clip method with bad inputs (min > max)"""
+        with self.assertRaises(ValueError):
+            _ = FixedPointMath.clip(FixedPoint(5.0), self.INF, self.NEG_INF)
+        with self.assertRaises(ValueError):
+            _ = FixedPointMath.clip(5, 3, 1)
 
     def test_minimum(self):
         """Test minimum function"""
