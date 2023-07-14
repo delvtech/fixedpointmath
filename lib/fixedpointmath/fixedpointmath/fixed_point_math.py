@@ -18,6 +18,13 @@ class FixedPointMath:
     """Math library that supports FixedPoint arithmetic"""
 
     @staticmethod
+    def clip(x: NUMERIC, minimum: NUMERIC, maximum: NUMERIC) -> NUMERIC:
+        """Clip the input, x, to be within (min, max), inclusive"""
+        if minimum > maximum:
+            raise ValueError(f"{minimum=} must be <= {maximum=}.")
+        return FixedPointMath.minimum(FixedPointMath.maximum(x, minimum), maximum)
+
+    @staticmethod
     def maximum(x: NUMERIC, y: NUMERIC) -> NUMERIC:
         """Compare the two inputs and return the greater value.
 
