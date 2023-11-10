@@ -112,12 +112,12 @@ class FixedPoint:
             # Look for optional exp notation
             exp_split = unscaled_value.lower().split("e")
             mantissa = exp_split[0]
-            if(len(exp_split) > 1):
+            if len(exp_split) > 1:
                 exponent = int(exp_split[1])
             else:
                 exponent = 0
 
-            if "." not in mantissa :  # input is always assumed to be a float
+            if "." not in mantissa:  # input is always assumed to be a float
                 mantissa += ".0"
             integer, remainder = mantissa.split(".")
             # removes underscores; they won't affect `int` cast and will affect `len`
@@ -126,13 +126,13 @@ class FixedPoint:
             if is_negative:
                 super().__setattr__(
                     "_scaled_value",
-                    int(integer) * 10**(self.decimal_places + exponent)
+                    int(integer) * 10 ** (self.decimal_places + exponent)
                     - int(remainder) * 10 ** (self.decimal_places - len(remainder) + exponent),
                 )
             else:
                 super().__setattr__(
                     "_scaled_value",
-                    int(integer) * 10**(self.decimal_places + exponent)
+                    int(integer) * 10 ** (self.decimal_places + exponent)
                     + int(remainder) * 10 ** (self.decimal_places - len(remainder) + exponent),
                 )
 
@@ -697,4 +697,3 @@ class FixedPoint:
     def ceil(self) -> FixedPoint:
         r"""Calls the `__ceil__` function"""
         return self.__ceil__()  # pylint: disable=unnecessary-dunder-call
-
