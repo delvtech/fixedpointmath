@@ -105,25 +105,35 @@ class FixedPoint:
             if not self._is_valid_number(unscaled_value):
                 raise ValueError(
                     f"string argument {unscaled_value=} must be a float string, "
-                    "e.g. '1.0', for the FixedPoint constructor"
+                    "e.g. '1.0' or '-1.23e10', for the FixedPoint constructor"
                 )
-            if "." not in unscaled_value:  # input is always assumed to be a float
-                unscaled_value += ".0"
-            integer, remainder = unscaled_value.split(".")
+            # Ensure lowercase exp if it exists
+            unscaled_value = unscaled_value.lower()
+            # Look for optional exp notation
+            exp_split = unscaled_value.lower().split("e")
+            mantissa = exp_split[0]
+            if len(exp_split) > 1:
+                exponent = int(exp_split[1])
+            else:
+                exponent = 0
+
+            if "." not in mantissa:  # input is always assumed to be a float
+                mantissa += ".0"
+            integer, remainder = mantissa.split(".")
             # removes underscores; they won't affect `int` cast and will affect `len`
-            remainder = remainder.replace("_", "")
+            mantissa = mantissa.replace("_", "")
             is_negative = "-" in integer
             if is_negative:
                 super().__setattr__(
                     "_scaled_value",
-                    int(integer) * 10**self.decimal_places
-                    - int(remainder) * 10 ** (self.decimal_places - len(remainder)),
+                    int(integer) * 10 ** (self.decimal_places + exponent)
+                    - int(remainder) * 10 ** (self.decimal_places - len(remainder) + exponent),
                 )
             else:
                 super().__setattr__(
                     "_scaled_value",
-                    int(integer) * 10**self.decimal_places
-                    + int(remainder) * 10 ** (self.decimal_places - len(remainder)),
+                    int(integer) * 10 ** (self.decimal_places + exponent)
+                    + int(remainder) * 10 ** (self.decimal_places - len(remainder) + exponent),
                 )
 
     @property
@@ -185,6 +195,8 @@ class FixedPoint:
 
         `(?:\.\d+)?` : An optional group consisting of a decimal point and one or more digits
 
+        `([eE][+-]?\d+)?` : An optional group consisting of an exponent for exponent notation
+
         `$` : End of the string
 
         Arguments
@@ -197,7 +209,7 @@ class FixedPoint:
         bool
             True if the string represents a valid number
         """
-        pattern = r"^-?\d{1,3}(?:_?\d{3})*(?:\.\d+)?$"
+        pattern = r"^-?\d{1,3}(?:_?\d{3})*(?:\.\d+)?([eE][+-]?\d+)?$"
         return bool(re.match(pattern, float_string))
 
     def _coerce_other(self, other: OtherTypes | FixedPoint) -> FixedPoint:

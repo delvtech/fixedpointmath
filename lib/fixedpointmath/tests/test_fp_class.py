@@ -25,6 +25,15 @@ class TestFixedPoint(unittest.TestCase):
         assert FixedPoint("5.01") == FixedPoint(5.01)
         assert FixedPoint("5.000001") == FixedPoint(5.000001)
         assert FixedPoint("5.000001000") == FixedPoint(5.000001)
+        # exp notation for fixed point
+        assert FixedPoint("5.01e3") == FixedPoint(5010)
+        assert FixedPoint("5.01e-3") == FixedPoint("0.00501")
+        assert FixedPoint("5.01E3") == FixedPoint(5010)
+        assert FixedPoint("5.01E-3") == FixedPoint("0.00501")
+        assert FixedPoint("-5e3") == FixedPoint(-5000)
+        assert FixedPoint("-5e-3") == FixedPoint("-0.005")
+        assert FixedPoint("-5E3") == FixedPoint(-5000)
+        assert FixedPoint("-5E-3") == FixedPoint("-0.005")
         # int == float
         assert FixedPoint(5) == FixedPoint(5.0)
         # float == int
