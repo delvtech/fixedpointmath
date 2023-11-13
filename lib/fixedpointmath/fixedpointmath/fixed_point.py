@@ -119,9 +119,11 @@ class FixedPoint:
 
             if "." not in mantissa:  # input is always assumed to be a float
                 mantissa += ".0"
-            integer, remainder = mantissa.split(".")
+
             # removes underscores; they won't affect `int` cast and will affect `len`
             mantissa = mantissa.replace("_", "")
+
+            integer, remainder = mantissa.split(".")
             is_negative = "-" in integer
             if is_negative:
                 super().__setattr__(
