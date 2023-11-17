@@ -32,6 +32,7 @@ class FixedPoint:
     _scaled_value: int  # integer representation of self
     _special_value: SpecialValues | None  # string representation of self
 
+    # pylint: disable=too-many-branches
     def __init__(
         self,
         unscaled_value: OtherTypes | str | FixedPoint | None = None,  # use default conversion
