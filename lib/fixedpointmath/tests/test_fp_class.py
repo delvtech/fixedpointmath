@@ -137,6 +137,7 @@ class TestFixedPoint(unittest.TestCase):
         assert FixedPoint("0.15").to_decimal() == Decimal("0.15")
         assert float(FixedPoint("0.15").to_decimal()) == 0.15
         assert FixedPoint(Decimal("0.15")) == FixedPoint("0.15")
+        assert int(FixedPoint(Decimal(5))) == 5
 
     def test_repr(self):
         r"""Test the repr method"""
