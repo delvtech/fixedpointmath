@@ -1,9 +1,9 @@
 """Tests for the FixedPoint class methods"""
 import math
 import unittest
+from decimal import Decimal
 
-from fixedpointmath import errors
-from fixedpointmath import FixedPoint
+from fixedpointmath import FixedPoint, errors
 
 
 class TestFixedPoint(unittest.TestCase):
@@ -41,6 +41,8 @@ class TestFixedPoint(unittest.TestCase):
         assert int(FixedPoint(5)) == 5  # int input directly maps, cast does not rescale
         assert float(FixedPoint(5.0)) == 5.0  # scales up on init, then back down on cast to float
         assert int(FixedPoint(5)) == float(FixedPoint(5.0))
+        # decimal == float
+        assert FixedPoint(Decimal("5.0")) == FixedPoint(5.0)
         # bool
         assert FixedPoint(True) == FixedPoint(1.0)
         assert FixedPoint(False) == FixedPoint(0.0)
@@ -130,8 +132,16 @@ class TestFixedPoint(unittest.TestCase):
         assert str(FixedPoint(True)) == "1.0"
         assert str(FixedPoint(False)) == "0.0"
 
+    def test_decimal_cast(self):
+        r"""Test Decimal casting"""
+        assert FixedPoint("0.15").to_decimal() == Decimal("0.15")
+        assert float(FixedPoint("0.15").to_decimal()) == 0.15
+        assert FixedPoint(Decimal("0.15")) == FixedPoint("0.15")
+        assert int(FixedPoint(Decimal(5))) == 5
+        assert isinstance(FixedPoint(5.52).to_decimal(), Decimal)
+
     def test_repr(self):
-        """Test the repr method"""
+        r"""Test the repr method"""
         # pylint: disable=unnecessary-dunder-call
         assert self.INF.__repr__() == 'FixedPoint("inf")'
         assert self.NEG_INF.__repr__() == 'FixedPoint("-inf")'
