@@ -2,12 +2,13 @@
 from __future__ import annotations
 
 import re
+from decimal import Decimal
 from typing import Any, Literal, Union, get_args
 
 from . import errors
 from .fixed_point_integer_math import FixedPointIntegerMath
 
-OtherTypes = Union[int, bool, float]
+OtherTypes = Union[int, bool, float, Decimal]
 SpecialValues = Literal["nan", "inf", "-inf"]
 
 
@@ -70,6 +71,8 @@ class FixedPoint:
                 self._set_int(unscaled_value)
             elif isinstance(unscaled_value, str):
                 self._set_str(unscaled_value)
+            elif isinstance(unscaled_value, Decimal):
+                self._set_str(str(unscaled_value))
             elif isinstance(unscaled_value, FixedPoint):
                 self._set_fixedpoint(unscaled_value)
             else:
@@ -116,13 +119,10 @@ class FixedPoint:
                 exponent = int(exp_split[1])
             else:
                 exponent = 0
-
             if "." not in mantissa:  # input is always assumed to be a float
                 mantissa += ".0"
-
             # removes underscores; they won't affect `int` cast and will affect `len`
             mantissa = mantissa.replace("_", "")
-
             integer, remainder = mantissa.split(".")
             is_negative = "-" in integer
             if is_negative:
@@ -228,11 +228,17 @@ class FixedPoint:
             return other
         if isinstance(other, int):
             return FixedPoint(other)
+        if isinstance(other, Decimal):
+            return FixedPoint(other)
         if isinstance(other, float):  # currently don't allow (most) floats
             if other == 0.0:  # 0 is unambiguous, so we will allow it
                 return FixedPoint(other)
             raise TypeError(f"unsupported operand type(s): {type(other)}")
         raise TypeError(f"unsupported operand type(s): {type(other)}")
+
+    def to_decimal(self) -> Decimal:
+        r"""Convert self to a Decimal type"""
+        return Decimal(str(self))
 
     def __add__(self, other: OtherTypes | FixedPoint) -> FixedPoint:
         r"""Enables '+' syntax"""
