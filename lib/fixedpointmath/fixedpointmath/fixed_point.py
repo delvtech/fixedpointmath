@@ -126,18 +126,22 @@ class FixedPoint:
             mantissa = mantissa.replace("_", "")
             integer, remainder = mantissa.split(".")
             is_negative = "-" in integer
+            # We ensure the remainder <= self.decimal_places
+            if len(remainder) > self.decimal_places:
+                remainder = remainder[: self.decimal_places]
+
             if is_negative:
-                super().__setattr__(
-                    "_scaled_value",
+                scaled_value = int(
                     int(integer) * 10 ** (self.decimal_places + exponent)
-                    - int(remainder) * 10 ** (self.decimal_places - len(remainder) + exponent),
+                    - int(remainder) * 10 ** (self.decimal_places - len(remainder) + exponent)
                 )
             else:
-                super().__setattr__(
-                    "_scaled_value",
+                scaled_value = int(
                     int(integer) * 10 ** (self.decimal_places + exponent)
-                    + int(remainder) * 10 ** (self.decimal_places - len(remainder) + exponent),
+                    + int(remainder) * 10 ** (self.decimal_places - len(remainder) + exponent)
                 )
+
+            super().__setattr__("_scaled_value", scaled_value)
 
     @property
     def scaled_value(self) -> int:
