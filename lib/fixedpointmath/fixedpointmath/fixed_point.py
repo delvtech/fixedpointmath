@@ -133,10 +133,14 @@ class FixedPoint:
                     - int(remainder) * 10 ** (self.decimal_places - len(remainder) + exponent),
                 )
             else:
+                # The operation below casts to a float when remainder > self.decimal_places, hence
+                # we explicitly cast to int to truncate.
                 super().__setattr__(
                     "_scaled_value",
-                    int(integer) * 10 ** (self.decimal_places + exponent)
-                    + int(remainder) * 10 ** (self.decimal_places - len(remainder) + exponent),
+                    int(
+                        int(integer) * 10 ** (self.decimal_places + exponent)
+                        + int(remainder) * 10 ** (self.decimal_places - len(remainder) + exponent)
+                    ),
                 )
 
     @property
