@@ -15,23 +15,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN}}
 
-      - name: install node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-
-      - name: install packages
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install # will run `yarn install` command
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # if needed
-
-      - name: install foundry
-        uses: foundry-rs/foundry-toolchain@v1
-        with:
-          version: nightly
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
