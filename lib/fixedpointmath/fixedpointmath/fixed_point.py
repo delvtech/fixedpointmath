@@ -128,7 +128,7 @@ class FixedPoint:
             is_negative = "-" in integer
             # We ensure the remainder <= self.decimal_places
             if len(remainder) > self.decimal_places:
-                remainder = remainder[:18]
+                remainder = remainder[: self.decimal_places]
 
             if is_negative:
                 scaled_value = int(
