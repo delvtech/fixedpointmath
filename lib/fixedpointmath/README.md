@@ -1,2 +1,0 @@
-# fixedpointmath
-**fixedpointmath** lib.
