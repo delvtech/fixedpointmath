@@ -25,6 +25,8 @@ class TestFixedPoint(unittest.TestCase):
         assert FixedPoint("5.01") == FixedPoint(5.01)
         assert FixedPoint("5.000001") == FixedPoint(5.000001)
         assert FixedPoint("5.000001000") == FixedPoint(5.000001)
+        # str with > 18 decimal places gets truncated
+        assert FixedPoint("0.123456789012345678901") == FixedPoint("0.123456789012345678")
         # exp notation for fixed point
         assert FixedPoint("5.01e3") == FixedPoint(5010)
         assert FixedPoint("5.01e-3") == FixedPoint("0.00501")
