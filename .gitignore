@@ -30,7 +30,7 @@ htmlcov
 */*/build
 
 # Pypi builds
-lib/*/dist
+dist
 
 # PEP 582
 __pypackages__/

@@ -15,7 +15,6 @@ python -m pip install --upgrade build twine
 4. Build the distribution within the subpackage. For example, to build the `fixedpointmath` package,
 
 ```bash
-cd lib/fixedpointmath
 python -m build
 ```
 
